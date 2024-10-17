@@ -2,12 +2,13 @@ const multer = require('multer');
 const path = require('path');
 
 // Set storage engine
-const storage = multer.diskStorage({
-     destination: './public/uploads/',
-     filename: (req, file, cb) => {
-          cb(null, `${Date.now()}-${file.originalname}`);
-     },
-});
+// const storage = multer.diskStorage({
+//      destination: './public/uploads/',
+//      filename: (req, file, cb) => {
+//           cb(null, `${Date.now()}-${file.originalname}`);
+//      },
+// });
+const storage = multer.memoryStorage();
 
 // Check file type (only allow images)
 function checkFileType(file, cb) {

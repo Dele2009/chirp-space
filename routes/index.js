@@ -51,9 +51,9 @@ router.get('/posts/edit/:id', isAuthenticated, async (req, res) => {
 });
 
 // Handle post editing (with image upload)
-router.post('/posts/edit/:id', isAuthenticated, upload.single('image'), postController.editPost);
+router.post('/posts/edit/:postId', isAuthenticated, upload.single('image'), postController.editPost);
 
 // Handle post deletion
-router.post('/posts/delete/:id', isAuthenticated, postController.deletePost);
+router.post('/posts/delete/:postId', isAuthenticated, postController.deletePost);
 
 module.exports = router;

@@ -3,7 +3,7 @@ const admin = require("firebase-admin");
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
 admin.initializeApp({
      credential: admin.credential.cert(serviceAccount),
-     // databaseURL: "https://<your-project-id>.firebaseio.com",
+     storageBucket: process.env.FIREBASE_BUCKET_URL || 'mashmall.appspot.com', // Replace with your bucket name
 });
 
 const verifyIdToken = async (idToken) => {
@@ -16,5 +16,6 @@ const verifyIdToken = async (idToken) => {
      }
 };
 
+const bucket = admin.storage().bucket();
 
-module.exports = { admin, verifyIdToken };
+module.exports = { admin, verifyIdToken, bucket };
