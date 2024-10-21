@@ -1,4 +1,4 @@
-const admin = require("firebase-admin");
+import admin from "firebase-admin";
 // const serviceAccount = require("./path-to-your-firebase-serviceAccountKey.json");
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
 admin.initializeApp({
@@ -18,4 +18,4 @@ const verifyIdToken = async (idToken) => {
 
 const bucket = admin.storage().bucket();
 
-module.exports = { admin, verifyIdToken, bucket };
+export { admin, verifyIdToken, bucket };

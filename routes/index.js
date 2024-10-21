@@ -1,10 +1,11 @@
-const express = require('express');
+import express from 'express'
+import { isAuthenticated } from '../middlewares/auth'
+import postController from '../controllers/postController'
+import upload from '../config/multer'
+import { Post } from '../models'
+import { ejsRenderer } from '../utilities/helpers'
+
 const router = express.Router();
-const { isAuthenticated } = require('../middlewares/auth');
-const postController = require('../controllers/postController');
-const upload = require('../config/multer');
-const { Post } = require('../models');
-const { ejsRenderer } = require('../utilities/helpers');
 
 // Homepage (show all posts)
 router.get('/', async (req, res) => {
@@ -56,4 +57,4 @@ router.post('/posts/edit/:postId', isAuthenticated, upload.single('image'), post
 // Handle post deletion
 router.post('/posts/delete/:postId', isAuthenticated, postController.deletePost);
 
-module.exports = router;
+export default router;

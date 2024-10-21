@@ -1,4 +1,4 @@
-const { bucket } = require("../config/firebase-admin.config");
+import { bucket } from "../config/firebase-admin.config"
 
 /**
  * Uploads a file to Firebase Storage.
@@ -42,4 +42,5 @@ async function deleteFileFromStorage(filePath) {
   console.log(`File ${filePath} deleted successfully.`);
 }
 
-module.exports = { uploadFileToStorage, deleteFileFromStorage };
+
+export { uploadFileToStorage, deleteFileFromStorage };

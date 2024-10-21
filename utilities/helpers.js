@@ -1,6 +1,6 @@
-const moment = require("moment")
+import moment from "moment"
 
-exports.ejsRenderer = {
+export const ejsRenderer = {
      defaultLayout: (res, view, options = {}) => {
           return res.render(view, { ...options, layout: 'layouts/layout' })
      },
@@ -9,7 +9,7 @@ exports.ejsRenderer = {
      }
 }
 
-exports.getRandomString = (length) => {
+export const getRandomString = (length) => {
      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
      let randomcharacters = ''
 
@@ -21,6 +21,6 @@ exports.getRandomString = (length) => {
      return randomcharacters;
 }
 
-exports.formatStringToAgo = (dateString) => {
+export const formatStringToAgo = (dateString) => {
      return moment(dateString).fromNow();
 }

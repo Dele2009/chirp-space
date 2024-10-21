@@ -1,12 +1,12 @@
-const { Op } = require('sequelize');
-const { User } = require('../models');
-const bcrypt = require('bcryptjs');
-const { getRandomString } = require('../utilities/helpers');
-const { verifyIdToken } = require('../config/firebase-admin.config');
-const { default: axios } = require('axios');
+import { Op } from 'sequelize'
+import { User } from '../models'
+import bcrypt from 'bcryptjs'
+import { getRandomString } from '../utilities/helpers'
+import { verifyIdToken } from '../config/firebase-admin.config'
+import axios from 'axios'
 
 // Register Google auth
-// exports.googleAuth = async (req, res) => {
+// export const googleAuth = async (req, res) => {
 //      const { idToken, userdetails } = req.body;
 //      const {
 //           uid,
@@ -54,7 +54,7 @@ const { default: axios } = require('axios');
 //           res.redirect(req.url);
 //      }
 // }
-exports.googleAuth = async (req, res) => {
+export const googleAuth = async (req, res) => {
      const { code } = req.query;
 
      try {
@@ -116,8 +116,13 @@ exports.googleAuth = async (req, res) => {
 };
 
 // Register User
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
      const { firstName, lastName, username, email, password: Password } = req.body;
+
+     if (!firstName || !lastName || !email || !Password) {
+          req.flash('error_msg', 'Error invalid details: All fields maked with the symbol (*) must be filled.');
+          return res.redirect('/users/register');
+     }
 
      try {
           const existingUser = await User.findOne({ where: { email } });
@@ -163,7 +168,7 @@ exports.register = async (req, res) => {
 };
 
 // Login User
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
      const { name, password: Password } = req.body;
      try {
           const user = await User.findOne({
@@ -200,7 +205,7 @@ exports.login = async (req, res) => {
 };
 
 // Logout User
-exports.logout = async (req, res) => {
+export const logout = async (req, res) => {
 
      req.flash('success_msg', 'Logged out successfully.');
      req.session.destroy((err) => {

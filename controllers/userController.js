@@ -1,8 +1,8 @@
-const { User, Post } = require('../models');
-const { ejsRenderer } = require('../utilities/helpers');
+import  { User, Post } from '../models'
+import  { ejsRenderer } from '../utilities/helpers'
 
 // Get profile details9
-exports.getProfile = async (req, res) => {
+export const getProfile = async (req, res) => {
      try {
           const { user } = req.session
           console.log(user, req.originalUrl)
@@ -30,7 +30,7 @@ exports.getProfile = async (req, res) => {
 };
 
 // Edit user profile
-exports.editProfile = async (req, res) => {
+export const editProfile = async (req, res) => {
      const { username, email } = req.body;
      try {
           await User.update({ username, email }, { where: { id: req.session.user.id } });
@@ -43,7 +43,7 @@ exports.editProfile = async (req, res) => {
 };
 
 // Delete account
-exports.deleteAccount = async (req, res) => {
+export const deleteAccount = async (req, res) => {
      try {
           await User.destroy({ where: { id: req.session.user.id } });
           req.session.destroy(err => {
@@ -58,7 +58,7 @@ exports.deleteAccount = async (req, res) => {
 };
 
 // Search for users
-exports.searchUsers = async (req, res) => {
+export const searchUsers = async (req, res) => {
      const { query } = req.query;
      try {
           const users = await User.findAll({ where: { username: { [Op.like]: `%${query}%` } } });
@@ -76,7 +76,7 @@ exports.searchUsers = async (req, res) => {
 };
 
 // Follow/Unfollow users (simplified version)
-exports.followUser = async (req, res) => {
+export const followUser = async (req, res) => {
      // Implement follow functionality (can use associations or a separate 'Followers' model)
      req.flash('success_msg', 'User followed/unfollowed successfully.');
      res.redirect('/');

@@ -1,9 +1,9 @@
-const { Post } = require('../models');
-const path = require('path');
-const { uploadFileToStorage, deleteFileFromStorage } = require('../utilities/firebaseAdmin');
+import { Post } from '../models'
+import path from 'path'
+import { uploadFileToStorage, deleteFileFromStorage } from '../utilities/firebaseAdmin'
 
 // Create a new post with image
-// exports.createPost = async (req, res) => {
+// export const createPost = async (req, res) => {
 //      const { title, content, tags } = req.body;
 //      console.log(req.body)
 //      let imageUrl = '';
@@ -28,7 +28,7 @@ const { uploadFileToStorage, deleteFileFromStorage } = require('../utilities/fir
 //      }
 // };
 
-exports.createPost = async (req, res) => {
+export const createPost = async (req, res) => {
      const { user } = req.session
      const { title, content, tags } = req.body;
      console.log(req.body);
@@ -70,7 +70,7 @@ exports.createPost = async (req, res) => {
 
 
 // Edit an existing post (with image update)
-exports.editPost = async (req, res) => {
+export const editPost = async (req, res) => {
      const { title, content, tags } = req.body;
      let imageUrl = req.body.existingImage;
 
@@ -92,7 +92,7 @@ exports.editPost = async (req, res) => {
 };
 
 // Delete a post
-exports.deletePost = async (req, res) => {
+export const deletePost = async (req, res) => {
      const { postId } = req.params; // Assuming you're passing the post ID in the URL
      try {
           const post = await Post.findByPk(postId); // Fetch the post to get the image URL

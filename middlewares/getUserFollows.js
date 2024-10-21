@@ -1,4 +1,4 @@
-const { User, UserFollower } = require('../models'); // Assuming you have User and Follower models
+import { User, UserFollower } from '../models'; // Assuming you have User and Follower models
 
 const getFollowersAndFollowing = async (req, res, next) => {
      try {
@@ -38,4 +38,4 @@ const getFollowersAndFollowing = async (req, res, next) => {
      }
 };
 
-module.exports = getFollowersAndFollowing;
+export default getFollowersAndFollowing;

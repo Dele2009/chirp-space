@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db.config');
+import { DataTypes } from 'sequelize'
+import sequelize from '../config/db.config'
 
 const Post = sequelize.define('Post', {
   title: {
@@ -24,4 +24,4 @@ const Post = sequelize.define('Post', {
   indexes: []
 });
 
-module.exports = Post;
+export default Post;

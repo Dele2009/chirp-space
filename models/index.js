@@ -1,10 +1,10 @@
 // const {Sequelize} = require('sequelize');
-const sequelize = require('../config/db.config');
+import sequelize from '../config/db.config'
 
 // Load models
-const User = require('./User');
-const Post = require('./Post');
-const UserFollower = require('./UserFollower');
+import User from './User'
+import Post from './Post'
+import UserFollower from './UserFollower'
 
 
 // Define relationships
@@ -28,4 +28,4 @@ sequelize.sync(
   .then(() => console.log('Models synchronized'))
   .catch(err => console.log('Sync error:', err));
 
-module.exports = { User, Post, UserFollower };
+export { User, Post, UserFollower };

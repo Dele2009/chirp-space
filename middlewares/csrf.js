@@ -1,6 +1,6 @@
-const csrf = require('csurf');
+import csrf from 'csurf';
 
 // Setup CSRF protection
 const csrfProtection = csrf({ cookie: true });
 
-module.exports = csrfProtection;
+export default csrfProtection;

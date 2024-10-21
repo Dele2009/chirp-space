@@ -1,10 +1,11 @@
-const express = require('express');
+import express from 'express'
+import authController from '../controllers/authController'
+import userController from '../controllers/userController'
+import { isAuthenticated } from '../middlewares/auth'
+import { verifyIdToken } from '../config/firebase-admin.config'
+import getFollowersAndFollowing from '../middlewares/getUserFollows'
+
 const router = express.Router();
-const authController = require('../controllers/authController');
-const userController = require('../controllers/userController');
-const { isAuthenticated } = require('../middlewares/auth');
-const { verifyIdToken } = require('../config/firebase-admin.config');
-const getFollowersAndFollowing = require('../middlewares/getUserFollows');
 
 // Google auth
 router.get('/auth/google', (req, res)=>{
@@ -63,4 +64,4 @@ router.get('/search', isAuthenticated, userController.searchUsers);
 // Follow/Unfollow users
 router.post('/follow/:id', isAuthenticated, userController.followUser);
 
-module.exports = router;
+export default router;

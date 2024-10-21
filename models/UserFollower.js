@@ -1,6 +1,6 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db.config');
-const User = require('./User');  // Import User model
+import { DataTypes } from 'sequelize'
+import sequelize from '../config/db.config'
+// import User from './User'  // Import User model
 
 const UserFollower = sequelize.define('UserFollower', {
   followerId: {
@@ -23,4 +23,4 @@ const UserFollower = sequelize.define('UserFollower', {
 
 // Define associations
 
-module.exports = UserFollower;
+export default UserFollower;
