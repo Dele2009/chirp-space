@@ -1,10 +1,10 @@
 // const {Sequelize} = require('sequelize');
-import sequelize from '../config/db.config'
+import sequelize from '../config/db.config.js'
 
 // Load models
-import User from './User'
-import Post from './Post'
-import UserFollower from './UserFollower'
+import User from './User.js'
+import Post from './Post.js'
+import UserFollower from './UserFollower.js'
 
 
 // Define relationships

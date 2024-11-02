@@ -1,4 +1,4 @@
-import { bucket } from "../config/firebase-admin.config"
+import { bucket } from "../config/firebase-admin.config.js"
 
 /**
  * Uploads a file to Firebase Storage.

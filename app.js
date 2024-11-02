@@ -12,9 +12,10 @@ import path from 'path';
 import sequelize from './config/db.config.js'; // Ensure the .js extension
 import { formatStringToAgo } from './utilities/helpers.js'; // Ensure the .js extension
 import { userContext } from './middlewares/auth.js'; // Ensure the .js extension
-import models from './models/index.js'; // Ensure the .js extension
+import * as models from './models/index.js'; // Ensure the .js extension
 
 // AdminJS imports
+
 import AdminJS from 'adminjs';
 import AdminJSExpress from '@adminjs/express';
 import AdminJSSequelize from '@adminjs/sequelize';

@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize'
-import sequelize from '../config/db.config'
+import sequelize from '../config/db.config.js'
 
 const Post = sequelize.define('Post', {
   title: {

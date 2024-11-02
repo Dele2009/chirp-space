@@ -1,6 +1,6 @@
-import { Post } from '../models'
+import { Post } from '../models/index.js'
 import path from 'path'
-import { uploadFileToStorage, deleteFileFromStorage } from '../utilities/firebaseAdmin'
+import { uploadFileToStorage, deleteFileFromStorage } from '../utilities/firebaseAdmin.js'
 
 // Create a new post with image
 // export const createPost = async (req, res) => {

@@ -95,13 +95,17 @@
           <div class="grid gap-4 sm:grid-cols-2 mb-4">
             <div>
               <label class="block text-sm font-medium text-gray-900 dark:text-white">First Name *</label>
-              <input type="text" name="firstName" placeholder="John" required
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input type="text" name="firstName" placeholder="John" class="form-input">
+              <p class="text-xs">
+
+              </p>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-900 dark:text-white">Last Name *</label>
-              <input type="text" name="lastName" placeholder="Doe" required
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input type="text" name="lastName" placeholder="Doe" class="form-input">
+              <p class="text-xs">
+
+              </p>
             </div>
           </div>
         </div>
@@ -112,13 +116,17 @@
           <div class="grid gap-4 sm:grid-cols-2 mb-4">
             <div>
               <label class="block text-sm font-medium text-gray-900 dark:text-white">Username</label>
-              <input type="text" name="username" placeholder="username123$$&"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input type="text" name="username" placeholder="username123$$&" class="form-input">
+              <p class="text-xs">
+
+              </p>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-900 dark:text-white">Email *</label>
-              <input type="email" name="email" placeholder="name@company.com" required
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input type="email" name="email" placeholder="name@company.com" class="form-input">
+              <p class="text-xs">
+
+              </p>
             </div>
           </div>
         </div>
@@ -129,20 +137,24 @@
           <div>
             <div>
               <label class="block text-sm font-medium text-gray-900 dark:text-white">Password *</label>
-              <input type="password" name="password" placeholder="••••••••" required
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input type="password" name="password" placeholder="••••••••" class="form-input">
+              <p class="text-xs">
+
+              </p>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-900 dark:text-white">Confirm Password *</label>
-              <input type="password" name="confirmPassword" placeholder="••••••••" required
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input type="password" name="confirmPassword" placeholder="••••••••" class="form-input" />
+              <p class="text-xs">
+
+              </p>
             </div>
           </div>
         </div>
 
         <div class="flex justify-between mt-4">
-          <button id="prevBtn" class="btn-secondary hidden">Back</button>
-          <button id="nextBtn" class="btn-primary">Next</button>
+          <button id="prevBtn" type="button" class="btn-secondary hidden">Back</button>
+          <button id="nextBtn" type="button" class="btn-primary">Next</button>
         </div>
       </div>
     </form>
@@ -152,7 +164,9 @@
 
 
 <!-- JavaScript for Stepper with Active Lines and Smooth Transitions -->
-<script>
+<script type="module">
+  import validateInput from '/js/validateInput.js'
+
   const steps = Array.from(document.querySelectorAll('.step-content'));
   const indicators = Array.from(document.querySelectorAll('.step-indicator'));
   const lines = Array.from(document.querySelectorAll('.step-line'));
@@ -161,9 +175,11 @@
   const loader = document.querySelector('.loader');
   const form = document.getElementById('register-form');
 
-    
-  let currentStep = 0;
 
+  let currentStep = 0;
+  
+  let invalidIndexes = []
+  let validIndexes = []
   function showLoader(callback) {
     loader.classList.remove('hidden');
     setTimeout(() => {
@@ -193,7 +209,55 @@
     nextBtn.textContent = currentStep === steps.length - 1 ? 'Submit' : 'Next';
   }
 
+  function isFormValid() {
+    const currentformcontent = document.querySelectorAll('.step-content')
+    console.log(currentformcontent)
+    if (currentformcontent.length > 0) {
+      const currentSec = currentformcontent[currentStep]
+      // if (!formContent.classList.contains('hidden')) {
+      const inputs = currentSec.querySelectorAll('input')
+      console.log(inputs)
+      if (currentStep === 2) {
+        const password = inputs[0]
+        const confirmPassword = inputs[1]
+        if (!validateInput(password, confirmPassword)) {
+          invalidIndexes.push(0, 1)
+        }else{
+          invalidIndexes = []
+          validIndexes.push(0,1)
+        }
+      } else {
+        inputs.forEach((input, index) => {
+          if (!validateInput(input)) {
+            invalidIndexes.push(index)
+          }else{
+            invalidIndexes = invalidIndexes.filter((data)=> data !== index)
+            validIndexes.push(index)
+          }
+        })
+      }
+      
+      if (validIndexes.length > 0) {
+        validIndexes.forEach(position => {
+          inputs[position].classList.remove('invalid')
+        })
+      }
+      if (invalidIndexes.length > 0) {
+       
+        invalidIndexes.forEach(position => {
+          inputs[position].classList.add('invalid')
+        })
+        // alert(invalidIndexes)
+        return false
+      }
+    }
+
+    // alert('Current form ok')
+    return true
+  }
+
   nextBtn.addEventListener('click', () => {
+    if (!isFormValid()) return;
     if (currentStep < steps.length - 1) {
       showLoader(() => {
         currentStep++;
@@ -202,25 +266,11 @@
     } else {
       document.querySelector('form[method="POST"]').submit();
     }
+    invalidIndexes = []
+    validIndexes = []
   });
 
-  function isFormValid(){
-    const invalidIndex = []
-    const currentformcontent = form.querySelectorAll('.stepper-content')
-    currentformcontent.map(formContent => {
-      if (!formContent.classList.contains('hidden')) {
-        const inputs = formContent.querySelectorAll('input')
-        inputs.forEach((input, index)=>{
-          if(!input.value){
-            invalidIndex.push(index)
-          }
-        })
-      }
-    })
-  }
   prevBtn.addEventListener('click', () => {
-    
-    
     if (currentStep > 0) {
       currentStep--;
       updateStepper();

@@ -1,9 +1,9 @@
 import express from 'express'
-import authController from '../controllers/authController'
-import userController from '../controllers/userController'
-import { isAuthenticated } from '../middlewares/auth'
-import { verifyIdToken } from '../config/firebase-admin.config'
-import getFollowersAndFollowing from '../middlewares/getUserFollows'
+import * as authController from '../controllers/authController.js'
+import * as userController from '../controllers/userController.js'
+import { isAuthenticated } from '../middlewares/auth.js'
+import { verifyIdToken } from '../config/firebase-admin.config.js'
+import getFollowersAndFollowing from '../middlewares/getUserFollows.js'
 
 const router = express.Router();
 

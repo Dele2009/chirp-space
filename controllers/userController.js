@@ -1,5 +1,5 @@
-import  { User, Post } from '../models'
-import  { ejsRenderer } from '../utilities/helpers'
+import { User, Post } from '../models/index.js'
+import { ejsRenderer } from '../utilities/helpers.js'
 
 // Get profile details9
 export const getProfile = async (req, res) => {

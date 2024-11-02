@@ -1,9 +1,13 @@
 import express from 'express'
-import { isAuthenticated } from '../middlewares/auth'
-import postController from '../controllers/postController'
-import upload from '../config/multer'
-import { Post } from '../models'
-import { ejsRenderer } from '../utilities/helpers'
+import { isAuthenticated } from '../middlewares/auth.js'
+import {
+  createPost,
+  editPost,
+  deletePost
+} from '../controllers/postController.js'
+import upload from '../config/multer.js'
+import { Post } from '../models/index.js'
+import { ejsRenderer } from '../utilities/helpers.js'
 
 const router = express.Router();
 
@@ -33,7 +37,7 @@ router.get('/', async (req, res) => {
 // });
 
 // Handle post creation (with image upload)
-router.post('/posts', isAuthenticated, upload.single('post-image'), postController.createPost);
+router.post('/posts', isAuthenticated, upload.single('post-image'), createPost);
 
 // Post editing page
 router.get('/posts/edit/:id', isAuthenticated, async (req, res) => {
@@ -52,9 +56,9 @@ router.get('/posts/edit/:id', isAuthenticated, async (req, res) => {
 });
 
 // Handle post editing (with image upload)
-router.post('/posts/edit/:postId', isAuthenticated, upload.single('image'), postController.editPost);
+router.post('/posts/edit/:postId', isAuthenticated, upload.single('image'), editPost);
 
 // Handle post deletion
-router.post('/posts/delete/:postId', isAuthenticated, postController.deletePost);
+router.post('/posts/delete/:postId', isAuthenticated, deletePost);
 
 export default router;
